@@ -11,27 +11,409 @@
 <meta content="Une communauté engagée, des projets concrets, un avenir à construire ensemble." property="og:description"/>
 <meta content="assets/images/hero-douar.jpg" property="og:image"/>
 <meta content="#1F4D3A" name="theme-color"/>
+<meta content="Association Tassakat" property="og:site_name"/>
+<meta content="fr_FR" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<!-- À FAIRE à la mise en ligne : og:image et og:url doivent être des adresses absolues (https://votre-domaine/...) ; ajouter <link rel="canonical"> -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"NGO","name":"Association Tassakat pour le Développement et la Coopération","alternateName":"Tassakat","description":"Association communautaire de Douar Tassakat (Aït Abdellah, province de Taroudant, Souss-Massa, Maroc).","address":{"@type":"PostalAddress","addressLocality":"Douar Tassakat, Aït Abdellah","addressRegion":"Souss-Massa","addressCountry":"MA"},"areaServed":"Province de Taroudant"}</script>
 <link href="assets/logo/favicon.png" rel="icon"/><!-- favicon remplaçable -->
-<link href="style.css" rel="stylesheet"/>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"NGO","name":"Association Tassakat pour le Développement et la Coopération","alternateName":"جمعية تسكات للتنمية والتعاون","address":{"@type":"PostalAddress","streetAddress":"Douar Tassakat, Commune d’Aït Abdellah","addressRegion":"Souss-Massa","addressCountry":"MA"}}</script>
+<style>
+/* ===== Palette & typographie (modifiable ici) ===== */
+:root{
+  --green:#1F4D3A; --green2:#163829; --sage:#8FA68E; --sage-l:#DDE6DB;
+  --sand:#E9DDC4; --sand-l:#F3ECDB; --cream:#FAF7F0; --ink:#2B2F2D; --mute:#5E655F; --ochre:#9A5B1E;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --ar:"Noto Naskh Arabic","Segoe UI",Tahoma,sans-serif; /* police arabe (future traduction) */
+  --r:14px; --h:68px;
+}
+html[lang="ar"]{--serif:var(--ar);--sans:var(--ar)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:var(--h)}
+body{font:17px/1.65 var(--sans);color:var(--ink);background:var(--cream);-webkit-text-size-adjust:100%}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ochre);outline-offset:3px}
+.sr,.skip:not(:focus){position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip{position:fixed;top:8px;inset-inline-start:8px;z-index:99;background:#fff;padding:8px 14px}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+.narrow{max-width:760px;margin-inline:auto}
+.center{text-align:center}
+p+p{margin-top:1em}
+h1,h2,h3,h4{font-family:var(--serif);line-height:1.2;color:var(--green);font-weight:700}
+h2{font-size:clamp(1.6rem,4.5vw,2.3rem)}
+h2.big{font-size:clamp(1.9rem,5.5vw,3rem);max-width:860px;margin-bottom:.6em}
+h3{font-size:1.35rem;margin-bottom:.5em}
+h4{font-size:1.1rem;margin:1.4em 0 .5em;font-family:var(--sans);letter-spacing:.02em}
+.kicker{font:600 .8rem var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);margin-bottom:.8em}
+.kicker.light{color:var(--sand)}
+.sec{padding:clamp(56px,9vw,104px) 0}
+.sec.sand{background:var(--sand-l)}
+.sec .narrow{margin-inline:0;margin-bottom:2.2rem}
+.sec .narrow.center{margin-inline:auto}
+
+/* En-tête */
+.top{position:sticky;top:0;z-index:50;height:var(--h);display:flex;align-items:center;justify-content:space-between;padding-inline:20px;background:rgba(250,247,240,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--sand)}
+.brand{display:flex;gap:12px;align-items:center;text-decoration:none}
+.brand strong{display:block;font:700 1.15rem var(--serif);letter-spacing:.12em;color:var(--green)}
+.brand small{display:none;font-size:.7rem;color:var(--mute);line-height:1.2}
+.logo{width:44px;height:44px;border-radius:50%;background:var(--green);color:var(--sand);display:grid;place-items:center;font:700 1.4rem var(--serif);overflow:hidden;flex:none}
+.logo img{width:100%;height:100%;object-fit:cover}
+nav#nav{display:flex;gap:6px;align-items:center}
+nav#nav a{text-decoration:none;font-size:.92rem;font-weight:500;padding:8px 12px;border-radius:99px;transition:background .2s}
+nav#nav a:hover{background:var(--sage-l)}
+nav#nav .cta-nav{background:var(--green);color:#fff}
+nav#nav .cta-nav:hover{background:var(--green2)}
+.burger{display:none;width:46px;height:46px;border:0;background:none;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:6px}
+.burger i{width:24px;height:2px;background:var(--green);transition:.25s}
+.burger[aria-expanded=true] i:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger[aria-expanded=true] i:nth-child(2){opacity:0}
+.burger[aria-expanded=true] i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+@media(min-width:1000px){.brand small{display:block}}
+@media(max-width:899px){
+  .burger{display:flex}
+  nav#nav{position:fixed;inset:var(--h) 0 auto 0;flex-direction:column;align-items:stretch;gap:0;padding:12px 20px 24px;background:var(--cream);border-bottom:1px solid var(--sand);transform:translateY(-120%);visibility:hidden;transition:transform .3s,visibility .3s}
+  nav#nav.open{transform:none;visibility:visible}
+  nav#nav a{padding:16px 8px;font-size:1.05rem;border-bottom:1px solid var(--sand-l);border-radius:0}
+  nav#nav .cta-nav{margin-top:12px;text-align:center;border-radius:99px}
+}
+
+/* Boutons */
+.btn{display:inline-block;padding:14px 26px;border-radius:99px;font-weight:600;text-decoration:none;border:2px solid var(--green);transition:.2s;text-align:center;line-height:1.3}
+.btn.primary{background:var(--green);color:#fff}
+.btn.primary:hover{background:var(--green2);transform:translateY(-2px)}
+.btn.primary.light{background:var(--sand);color:var(--green2);border-color:var(--sand)}
+.btn.primary.light:hover{background:#fff}
+.btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.btn.ghost:hover{background:rgba(255,255,255,.15)}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:2rem}
+
+/* Photos (emplacements remplaçables ; les URL distantes temporaires sont identifiées par un badge) */
+.ph{position:relative;background:linear-gradient(135deg,var(--sage-l),var(--sand));min-height:220px;overflow:hidden;border-radius:var(--r);display:grid;place-items:center}
+.ph:not(.loaded)::after{content:"[PHOTO À AJOUTER]";font:600 .78rem var(--sans);letter-spacing:.12em;color:var(--mute);border:1px dashed var(--mute);padding:6px 12px;border-radius:6px}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph.loaded{cursor:zoom-in}
+.ph.tall{min-height:340px}
+
+/* Accueil */
+.hero{position:relative;min-height:calc(100svh - var(--h));display:flex;align-items:center;color:#fff;background:var(--green2);overflow:hidden}
+.hero-bg{position:absolute;inset:0;border-radius:0;min-height:0;background:linear-gradient(160deg,#1F4D3A,#163829 60%,#3a4f2e)}
+.hero-bg::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,40,28,.88),rgba(14,40,28,.45));z-index:1}
+.hero-bg::after{inset:auto 20px 20px auto!important;z-index:2;color:#ddd!important;border-color:#ddd!important}
+.hero-in{position:relative;z-index:3;padding:64px 0}
+.eyebrow{font:600 .8rem var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--sand)}
+.hero h1{color:#fff;font-size:clamp(3.2rem,15vw,8rem);letter-spacing:.06em;line-height:1;margin:.2em 0}
+.slogan{font:italic 1.4rem/1.35 var(--serif)}
+.hero .slogan{color:var(--sand);font-size:clamp(1.3rem,3.6vw,2rem);max-width:700px}
+.lead{max-width:680px;margin-top:1.4rem;font-size:1.05rem;color:#eef1ec}
+.band{background:var(--sand);padding:36px 0}
+.prior{display:grid;gap:14px}
+.prior p{margin:0;display:flex;gap:14px;align-items:center;font:600 1.05rem var(--serif);color:var(--green2)}
+.prior b{font:700 .9rem var(--sans);width:38px;height:38px;border-radius:50%;background:var(--green);color:var(--sand);display:grid;place-items:center;flex:none}
+.stats{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:28px;padding-top:24px;border-top:1px solid rgba(31,77,58,.25);color:var(--green2);font-weight:500}
+.stats .num{display:block;font:700 2.6rem/1 var(--serif);color:var(--green)}
+.stats .num.pending{opacity:.55;border-bottom:2px dashed var(--ochre);display:inline-block}
+.stats .note{flex-basis:100%;font-size:.78rem;color:var(--mute);margin:0}
+@media(min-width:800px){.prior{grid-template-columns:repeat(3,1fr);gap:32px}}
+
+/* Éditorial */
+.split{display:grid;gap:28px;margin:44px 0;align-items:center}
+@media(min-width:800px){.split{grid-template-columns:1fr 1fr;gap:56px}}
+.vm{display:grid;gap:20px;margin:56px 0 48px}
+.vm article{padding:30px;border-radius:var(--r);background:var(--sage-l);border-inline-start:6px solid var(--green)}
+@media(min-width:800px){.vm{grid-template-columns:1fr 1fr}}
+.values{display:grid;gap:16px;margin:24px 0 48px}
+.values div{padding:26px;border-radius:var(--r);background:var(--green);color:#e8eee6;font-size:.98rem}
+.values b{display:block;font:700 1.2rem var(--serif);color:var(--sand);margin-bottom:.4em}
+.values.three div{background:#fff;color:var(--ink);border:1px solid var(--sand)}
+.values.three b{color:var(--green)}
+@media(min-width:700px){.values{grid-template-columns:1fr 1fr}.values.three{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.values:not(.three){grid-template-columns:repeat(4,1fr)}}
+.callout{padding:clamp(24px,4vw,44px);border-radius:var(--r);background:var(--sand);margin-top:44px}
+.sand .callout{background:var(--green);color:#e8eee6}
+.sand .callout h3{color:var(--sand)}
+.callout.diaspora{background:var(--green);color:#e8eee6}
+.callout.diaspora h3{color:var(--sand)}
+.callout.dk{background:var(--sand-l);color:var(--ink)}
+.callout.dk h3{color:var(--green)}
+.callout .small{font-size:.85rem;color:var(--mute)}
+
+/* Réalisations */
+.grid2{display:grid;gap:24px;margin-top:20px}
+@media(min-width:760px){.grid2{grid-template-columns:1fr 1fr}.grid2 .card:nth-child(even){margin-top:40px}}
+.card{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:0 8px 28px rgba(31,77,58,.09)}
+.card .ph{border-radius:0;min-height:240px}
+.cb{padding:26px}
+.cb h3{font-size:1.2rem}
+.cb h3 i{font:normal 700 .9rem var(--sans);color:var(--ochre);margin-inline-end:6px}
+.badge{display:inline-block;font:700 .75rem var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:99px;margin-bottom:14px}
+.badge.ok{background:var(--sage-l);color:var(--green)}
+.badge.wait{background:var(--sand);color:#6b3d0e}
+.badge.study{background:#E4EAF0;color:#2f4a63}
+.opt:empty{display:none}
+
+/* Projets */
+.flag{margin-top:48px;border-radius:calc(var(--r) + 6px);background:var(--green);color:#e8eee6;overflow:hidden}
+.flag-top{padding:clamp(28px,5vw,56px) clamp(22px,5vw,56px) 8px}
+.flag-top h3{color:#fff;font-size:clamp(1.7rem,4.8vw,2.7rem)}
+.flag-body{display:grid;gap:36px;padding:24px clamp(22px,5vw,56px) clamp(28px,5vw,56px)}
+.flag-body.one{display:block;padding-top:0}
+@media(min-width:900px){.flag-body:not(.one){grid-template-columns:1.3fr 1fr}}
+.flag h4{color:var(--sand)}
+ul{padding-inline-start:1.2em}
+li{margin:.4em 0}
+.flag aside{background:rgba(255,255,255,.07);border-radius:var(--r);padding:26px;align-self:start}
+.facts{display:flex;gap:28px;margin-bottom:18px}
+.facts b{display:block;font:700 2.6rem/1 var(--serif);color:var(--sand)}
+dt{font:600 .75rem var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--sand);margin-top:14px}
+dd{margin:2px 0 0}
+.mute{font-size:.85rem;opacity:.8;border:1px dashed var(--sand);padding:8px;border-radius:8px}
+.flag-gal{display:grid;gap:12px;padding:0 clamp(22px,5vw,56px) 32px}
+.flag-gal .ph{min-height:180px}
+@media(min-width:760px){.flag-gal{grid-template-columns:repeat(3,1fr)}}
+.proj2{margin-top:36px;padding:clamp(26px,5vw,52px);border-radius:calc(var(--r) + 6px);background:var(--sand-l);border:1px solid var(--sand)}
+.proj2 h3{font-size:clamp(1.5rem,4vw,2.1rem)}
+.cols{display:grid;gap:32px;margin-top:20px}
+@media(min-width:860px){.cols{grid-template-columns:1.2fr 1fr}}
+.strong{padding:16px 18px;background:#fff;border-inline-start:5px solid #2f4a63;border-radius:8px}
+.proj2 .btn{margin-top:20px}
+
+/* Engagements */
+.dark{background:var(--green2);color:#dbe4d9}
+.dark h2,.dark h3{color:#fff}
+.eng{list-style:none;padding:0;display:grid;gap:14px;counter-reset:e;margin:8px 0 56px}
+.eng li{counter-increment:e;padding:22px 22px 22px 70px;position:relative;margin:0;background:rgba(255,255,255,.06);border-radius:var(--r);font-size:.95rem}
+.eng li::before{content:counter(e,decimal-leading-zero);position:absolute;inset-inline-start:20px;top:18px;font:700 1.5rem var(--serif);color:var(--sand)}
+.eng b{display:block;color:#fff;font-size:1.02rem;margin-bottom:2px}
+@media(min-width:700px){.eng{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.eng{grid-template-columns:repeat(3,1fr)}}
+.split2{display:grid;gap:28px;margin-top:20px}
+@media(min-width:860px){.split2{grid-template-columns:1fr 1fr;gap:40px}}
+.sec:not(.dark) .split2{margin-top:44px}
+.sec:not(.dark) .split2 .callout{margin:0}
+
+/* Contact */
+.contact{display:grid;gap:32px;margin:48px 0 0;padding:clamp(24px,4vw,44px);background:#fff;border:1px solid var(--sand);border-radius:var(--r)}
+@media(min-width:860px){.contact{grid-template-columns:1.2fr 1fr}}
+.line{margin-top:.6em!important}
+.line a{color:var(--green);font-weight:600}
+.line span,.line a.pending{color:var(--mute)}
+.wabtns{display:grid;gap:12px;align-content:start}
+.wabtns .small{font-size:.82rem;color:var(--mute)}
+.final{padding:clamp(64px,10vw,120px) 0;background:var(--sage-l)}
+.final .slogan{margin-top:1.4rem;color:var(--green);font-size:1.5rem}
+
+/* Pied de page */
+footer{background:var(--green2);color:#cdd8cb;font-size:.92rem}
+.foot{display:grid;gap:32px;padding:56px 0 28px}
+@media(min-width:860px){.foot{grid-template-columns:1.6fr 1fr 1fr}}
+footer strong{color:#fff;font:700 1.1rem var(--serif)}
+footer nav{display:flex;flex-direction:column;gap:6px}
+footer a{text-decoration:none}footer a:hover{color:#fff;text-decoration:underline}
+.signature{font-style:italic;color:var(--sand)}
+.copy{text-align:center;padding:18px 20px;border-top:1px solid rgba(255,255,255,.12);font-size:.8rem}
+#socials{display:flex;flex-wrap:wrap;gap:10px}
+
+/* Retour haut & lightbox */
+.totop{position:fixed;inset-block-end:20px;inset-inline-end:20px;width:48px;height:48px;border-radius:50%;border:0;background:var(--green);color:#fff;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:40}
+.totop:hover{background:var(--green2)}
+dialog{border:0;background:#000d;color:#fff;max-width:100vw;max-height:100vh;width:100%;height:100%;padding:20px}
+dialog[open]{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+dialog::backdrop{background:#000c}
+dialog img{max-height:82vh;max-width:100%;object-fit:contain}
+dialog .x{position:absolute;top:12px;inset-inline-end:16px;font-size:2.4rem;line-height:1;background:none;border:0;color:#fff;cursor:pointer}
+
+/* Animations légères */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+.js .reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none;transition:none}*{transition:none!important}}
+
+/* ===================== FINITION VISUELLE ===================== */
+:root{--pat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M24 4 44 24 24 44 4 24Z M24 14 34 24 24 34 14 24Z' fill='none' stroke='%23ffffff' stroke-opacity='.07' stroke-width='1.5'/%3E%3C/svg%3E");
+--strip:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12'%3E%3Cpath d='M12 1 19 6 12 11 5 6Z' fill='%239A5B1E' fill-opacity='.85'/%3E%3C/svg%3E")}
+body{font-size:17.5px;letter-spacing:.005em}
+::selection{background:var(--sage);color:#fff}
+
+/* Icônes homogènes (trait 1.7, arrondi) */
+.ico{width:24px;height:24px;display:block}
+.chip{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--sage-l);color:var(--green);flex:none}
+.chip.over{position:absolute;top:16px;inset-inline-start:16px;z-index:2;background:rgba(250,247,240,.95);box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.values:not(.three) .chip{background:rgba(233,221,196,.14);color:var(--sand);margin-bottom:16px}
+.values.three .chip{margin-bottom:16px}
+.prior b .ico{width:20px;height:20px}
+.flag-top .chip{background:rgba(233,221,196,.16);color:var(--sand);margin-bottom:18px}
+.proj2 .chip{background:#E4EAF0;color:#2f4a63;margin-bottom:18px}
+.eng li{padding-inline-start:84px;min-height:92px;transition:background .25s,transform .25s}
+.eng li:hover{background:rgba(255,255,255,.11);transform:translateY(-3px)}
+.eng li .chip{position:absolute;inset-inline-start:20px;top:20px;background:rgba(233,221,196,.14);color:var(--sand)}
+.eng li::before{inset-inline-start:auto;inset-inline-end:16px;top:12px;font-size:.95rem;opacity:.4}
+
+/* Titres : filet d’accent */
+h2.big::after{content:"";display:block;width:64px;height:4px;border-radius:4px;background:var(--ochre);margin-top:.5em}
+.dark h2.big::after{background:var(--sand)}
+.kicker{display:flex;align-items:center;gap:12px}
+.kicker::before{content:"";width:28px;height:2px;background:currentColor;flex:none}
+.center.kicker,.center .kicker{justify-content:center}
+.sec>.wrap>h3.center{margin-top:8px}
+.sec>.wrap>h3.center::after{content:"";display:block;width:40px;height:3px;background:var(--sage);margin:10px auto 0;border-radius:3px}
+
+/* En-tête */
+.top{transition:box-shadow .3s,background .3s}
+.top.scrolled{box-shadow:0 6px 24px rgba(22,56,41,.12)}
+nav#nav a.act:not(.cta-nav){background:var(--sage-l);color:var(--green)}
+.logo{box-shadow:0 0 0 3px var(--sand)}
+
+/* Hero : motif géométrique + entrée douce */
+.hero-bg{background:var(--pat),linear-gradient(160deg,#24604a,#163829 55%,#3a4f2e)}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:12px;background:var(--strip) repeat-x center;z-index:4}
+.hero h1{text-shadow:0 4px 30px rgba(0,0,0,.35);font-weight:700}
+.hero .eyebrow{display:inline-block;padding:7px 14px;border:1px solid rgba(233,221,196,.5);border-radius:99px;background:rgba(14,40,28,.35);backdrop-filter:blur(4px)}
+.hero-in>*{animation:up .9s cubic-bezier(.2,.7,.2,1) both}
+.hero-in>:nth-child(2){animation-delay:.1s}.hero-in>:nth-child(3){animation-delay:.2s}.hero-in>:nth-child(4){animation-delay:.3s}.hero-in>:nth-child(5){animation-delay:.4s}
+@keyframes up{from{opacity:0;transform:translateY(24px)}}
+.btn{box-shadow:0 6px 18px rgba(22,56,41,.18)}
+.btn.ghost{box-shadow:none;backdrop-filter:blur(4px)}
+.btn.primary::after{content:" →";display:inline-block;transition:transform .2s}
+.btn.primary:hover::after{transform:translateX(4px)}
+[dir=rtl] .btn.primary::after{content:" ←"}
+
+/* Bandeau priorités / chiffres */
+.band{position:relative;padding-top:48px;background:linear-gradient(180deg,var(--sand),var(--sand-l))}
+.prior p{padding:18px 20px;background:rgba(255,255,255,.55);border-radius:var(--r);box-shadow:0 2px 0 rgba(31,77,58,.08)}
+.prior b{border-radius:12px}
+.stats{justify-content:space-between}
+.stats>div{flex:1 1 150px;padding:4px 0;font-size:.9rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.stats>div+div{border-inline-start:1px solid rgba(31,77,58,.2);padding-inline-start:24px}
+@media(max-width:560px){.stats>div+div{border:0;padding:0}}
+
+/* Photos : ombre, zoom, placeholders plus nobles */
+.ph{box-shadow:0 10px 30px rgba(31,77,58,.12)}
+.ph:not(.loaded){background:var(--pat),linear-gradient(135deg,var(--sage-l),var(--sand))}
+.ph:not(.loaded){background-color:var(--sand);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M24 4 44 24 24 44 4 24Z' fill='none' stroke='%231F4D3A' stroke-opacity='.1' stroke-width='1.5'/%3E%3C/svg%3E"),linear-gradient(135deg,var(--sage-l),var(--sand))}
+.ph img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.ph.loaded:hover img{transform:scale(1.05)}
+.hero-bg{box-shadow:none}
+
+/* Cartes réalisations */
+.card{border:1px solid rgba(31,77,58,.06);transition:transform .35s,box-shadow .35s}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(31,77,58,.16)}
+.grid2 .card:nth-child(even):hover{transform:translateY(-6px)}
+.card .ph{box-shadow:none;min-height:260px}
+.badge{display:inline-flex;align-items:center;gap:8px}
+.badge::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.badge.ok::before{content:"✓";width:auto;height:auto;background:none;font-size:.85rem}
+
+/* Projets */
+.flag{box-shadow:0 24px 60px rgba(22,56,41,.28);background:var(--pat),linear-gradient(160deg,#24604a,#1F4D3A 40%,#163829)}
+.flag aside{border:1px solid rgba(233,221,196,.25);background:rgba(14,40,28,.35)}
+.facts{padding-bottom:18px;border-bottom:1px solid rgba(233,221,196,.25)}
+.flag ul li::marker{color:var(--sand)}
+.flag-gal .ph{box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.proj2{box-shadow:0 14px 40px rgba(31,77,58,.08)}
+.strong{box-shadow:0 4px 14px rgba(47,74,99,.1)}
+
+/* Engagements & final */
+.dark{background:radial-gradient(900px 500px at 85% 0,rgba(143,166,142,.18),transparent 60%),var(--pat),var(--green2)}
+.callout{position:relative;overflow:hidden}
+.callout::before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:var(--ochre)}
+[dir=rtl] .callout::before{inset:0 0 0 auto}
+.callout.diaspora::before,.sand .callout::before{background:var(--sand)}
+.final{position:relative;background:var(--pat),radial-gradient(700px 360px at 50% 0,#fff,var(--sage-l));background-blend-mode:normal}
+.final::before{content:"";position:absolute;inset:0 0 auto 0;height:12px;background:var(--strip) repeat-x center}
+.final h2{font-size:clamp(2rem,6vw,3.4rem)}
+.final .slogan{padding-top:1.2rem;border-top:1px solid rgba(31,77,58,.25);display:inline-block}
+
+/* Contact */
+.contact{box-shadow:0 18px 50px rgba(31,77,58,.1)}
+.wabtns .btn{padding:16px 22px}
+.wabtns .btn:nth-child(n+2){background:transparent;color:var(--green)}
+.wabtns .btn:nth-child(n+2):hover{background:var(--green);color:#fff}
+
+/* Pied de page */
+footer{background:var(--pat),var(--green2);border-top:12px solid transparent;border-image:var(--strip) 0 0 12 0 repeat}
+footer nav a{padding:4px 0;border-bottom:1px solid transparent}
+.totop{transition:transform .2s,background .2s}.totop:hover{transform:translateY(-3px)}
+@media(prefers-reduced-motion:reduce){.hero-in>*{animation:none}}
+
+/* ===================== MULTILINGUE (FR / EN / AR-RTL) ===================== */
+.t{display:contents}
+.lang{display:flex;gap:2px;margin-inline-start:auto;margin-inline-end:8px;padding:3px;border:1px solid var(--sand);border-radius:99px;background:#fff}
+.lang button{border:0;background:none;font:600 .78rem var(--sans);padding:7px 11px;border-radius:99px;cursor:pointer;color:var(--mute);min-height:34px}
+.lang button{background:transparent;color:var(--mute)}
+.lang button:hover{background:var(--sage-l)}
+html[lang=fr] .lang [data-lang=fr],html[lang=en] .lang [data-lang=en],html[lang=ar] .lang [data-lang=ar]{background:var(--green);color:#fff}
+@media(min-width:900px){.lang{margin-inline-start:12px;margin-inline-end:0}.top{gap:8px}nav#nav{margin-inline-start:auto}.lang{order:3}}
+html[lang=en] .ph:not(.loaded)::after{content:"[PHOTO TO ADD]"}
+html[lang=ar] .ph:not(.loaded)::after{content:"[أضف صورة]"}
+/* Arabe : pas d’espacement de lettres (casserait la liaison), interlignage plus ample */
+html[lang=ar] body{line-height:1.85}
+html[lang=ar] *{letter-spacing:0!important;text-transform:none!important}
+html[lang=ar] .slogan,html[lang=ar] .signature,html[lang=ar] i{font-style:normal}
+html[lang=ar] h1,html[lang=ar] h2,html[lang=ar] h3{line-height:1.45}
+/* RTL */
+[dir=rtl] .eng li{padding-left:22px}
+[dir=rtl] .hero-bg::before{background:linear-gradient(270deg,rgba(14,40,28,.88),rgba(14,40,28,.45))}
+[dir=rtl] .hero-bg::after{inset:auto auto 20px 20px!important}
+[dir=rtl] .kicker,[dir=rtl] .eyebrow{letter-spacing:0}
+[dir=rtl] .totop{transform:none}
+.hero-bg::after{position:absolute}
+/* Correctifs techniques */
+[hidden]{display:none!important}
+main:focus{outline:none}
+.hero{min-height:calc(100vh - var(--h));min-height:calc(100svh - var(--h))}
+body:not(.preview) .ph:not(.loaded)::after{content:none!important;display:none}
+@media print{.js .reveal{opacity:1;transform:none}.top,.totop,.burger,.lang{display:none}}
+
+
+/* Photos temporaires issues de banques d'images : clairement identifiées */
+.ph[data-illustrative="true"]:not(.hero-bg)::before{
+  content:"PHOTO ILLUSTRATIVE · À REMPLACER";
+  position:absolute;z-index:5;inset:auto 12px 12px auto;
+  max-width:calc(100% - 24px);padding:7px 11px;border-radius:6px;
+  background:rgba(22,56,41,.82);color:#fff;
+  font:600 .66rem/1.3 var(--sans);letter-spacing:.06em;
+  text-align:center;pointer-events:none
+}
+html[lang="en"] .ph[data-illustrative="true"]:not(.hero-bg)::before{content:"ILLUSTRATIVE PHOTO · TO BE REPLACED"}
+html[lang="ar"] .ph[data-illustrative="true"]:not(.hero-bg)::before{content:"صورة توضيحية · تُستبدل لاحقاً";letter-spacing:0}
+[dir="rtl"] .ph[data-illustrative="true"]:not(.hero-bg)::before{inset:auto auto 12px 12px}
+/* Le visuel hero conserve son voile sombre ; son badge utilise ::after */
+.hero-bg[data-illustrative="true"]::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(14,40,28,.78),rgba(14,40,28,.35));z-index:1
+}
+.hero-bg[data-illustrative="true"]::after{
+  content:"PHOTO ILLUSTRATIVE · À REMPLACER";
+  position:absolute;inset:auto 20px 20px auto!important;z-index:2;
+  padding:7px 11px;border-radius:6px;background:rgba(22,56,41,.82);
+  color:#fff!important;border:0!important;font:600 .66rem/1.3 var(--sans);
+  letter-spacing:.06em;text-align:center;pointer-events:none
+}
+html[lang="en"] .hero-bg[data-illustrative="true"]::after{content:"ILLUSTRATIVE PHOTO · TO BE REPLACED"}
+html[lang="ar"] .hero-bg[data-illustrative="true"]::after{content:"صورة توضيحية · تُستبدل لاحقاً";letter-spacing:0}
+[dir="rtl"] .hero-bg[data-illustrative="true"]::before{background:linear-gradient(270deg,rgba(14,40,28,.78),rgba(14,40,28,.35))}
+[dir="rtl"] .hero-bg[data-illustrative="true"]::after{inset:auto auto 20px 20px!important}
+
+</style>
 </head>
 <body>
-<a class="skip" data-i18n="t1" href="#accueil">Aller au contenu</a>
+<a class="skip" data-i18n="t1" href="#main">Aller au contenu</a>
 <header class="top" id="top">
 <a aria-label="Association Tassakat – accueil" class="brand" href="#accueil">
-<span class="logo" id="logo" title="[LOGO OFFICIEL À INTÉGRER]">T</span>
+<span class="logo" id="logo">T</span>
 <span><strong data-i18n="t2">TASSAKAT</strong><small data-i18n="t3">Association pour le Développement et la Coopération</small></span>
 </a>
 <div class="lang" role="group" aria-label="Langue / Language / اللغة"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">عربية</button></div>
-  <button aria-controls="nav" aria-expanded="false" aria-label="Ouvrir le menu" class="burger"><i></i><i></i><i></i></button>
+  <button type="button" aria-controls="nav" aria-expanded="false" aria-label="Ouvrir le menu" class="burger"><i></i><i></i><i></i></button>
 <nav aria-label="Navigation principale" id="nav">
 <a data-i18n="t4" href="#accueil">Accueil</a><a data-i18n="t5" href="#association">Qui sommes-nous ?</a><a data-i18n="t6" href="#realisations">Réalisations</a><a data-i18n="t7" href="#projets">Projets prioritaires</a><a data-i18n="t8" href="#engagements">Engagements</a><a class="cta-nav" data-i18n="t9" href="#contact">Contact</a>
 </nav>
 </header>
-<main>
+<main id="main" tabindex="-1">
 <!-- 01 ACCUEIL -->
 <section class="hero" id="accueil">
-<div class="ph hero-bg" data-alt="Vue d’ensemble de Douar Tassakat" data-img="hero-douar.jpg" data-nolightbox=""></div>
+<div class="ph hero-bg" data-alt="Vue d’ensemble de Douar Tassakat" data-img="https://images.unsplash.com/photo-1517226983076-bc2efa0a99b1?auto=format&fit=crop&w=2000&q=85" data-illustrative="true" data-nolightbox=""></div>
 <div class="wrap hero-in">
 <p class="eyebrow" data-i18n="t10">Douar Tassakat · Aït Abdellah · Taroudant · Maroc</p>
 <h1 data-i18n="t11">TASSAKAT</h1>
@@ -70,10 +452,10 @@
 <p data-i18n="t28">L’Association Tassakat pour le Développement et la Coopération est une association communautaire basée à Douar Tassakat, dans la commune d’Aït Abdellah, province de Taroudant, région Souss-Massa, au Maroc. Elle s’appuie sur la solidarité, la participation des habitants et l’engagement collectif pour contribuer à l’amélioration des conditions de vie dans le douar.</p>
 <p data-i18n="t29">Nous sommes convaincus que le développement local commence par une bonne connaissance des besoins du territoire, l’implication de ses habitants et la mise en œuvre de projets adaptés à la réalité locale. Notre ambition est de renforcer progressivement la capacité de l’association à concevoir, porter et suivre des initiatives en partenariat avec les acteurs publics, privés et associatifs.</p>
 </div>
-<div class="ph tall" data-alt="Réunion de la communauté de Tassakat" data-img="communaute.jpg"></div>
+<div class="ph tall" data-alt="Réunion de la communauté de Tassakat" data-img="https://images.pexels.com/photos/6749656/pexels-photo-6749656.jpeg?auto=compress&cs=tinysrgb&w=1400" data-illustrative="true"></div>
 </div>
 <div class="split rev reveal">
-<div class="ph tall" data-alt="Paysage et territoire de Tassakat" data-img="territoire.jpg"></div>
+<div class="ph tall" data-alt="Paysage et territoire de Tassakat" data-img="https://images.unsplash.com/photo-1742806417780-f55c9ae21c7d?auto=format&fit=crop&w=1400&q=82" data-illustrative="true"></div>
 <div>
 <h3 data-i18n="t30">Un engagement profondément enraciné dans notre territoire</h3>
 <p data-i18n="t31">Notre connaissance du douar et de son environnement nous permet d’être attentifs aux préoccupations des habitants et aux priorités de la communauté. Cet ancrage local constitue un point de départ pour identifier les besoins, favoriser le dialogue et proposer des projets adaptés. Nous souhaitons également renforcer les liens entre les habitants, les familles installées ailleurs et les membres de la diaspora.</p>
@@ -103,10 +485,10 @@
 <h2 class="big" data-i18n="t44">Des actions concrètes, au service de tous.</h2>
 <p class="narrow" data-i18n="t45">Le développement de Tassakat se construit progressivement, grâce à l’engagement de la communauté et aux initiatives menées pour répondre à des besoins essentiels. Les réalisations présentées ici témoignent de cette volonté d’agir concrètement pour améliorer le cadre de vie du douar.</p>
 <div class="grid2">
-<article class="card reveal"><div class="ph" data-alt="Réseau d’alimentation en eau potable de Tassakat" data-img="realisation-eau.jpg"></div><div class="cb"><span class="badge ok" data-i18n="t46">Réalisation achevée</span><h3 data-i18n="t47"><i>01</i> Mise en place d’un réseau d’alimentation en eau potable</h3><p data-i18n="t48">Un réseau d’alimentation en eau potable a été installé afin de desservir les foyers du douar. Cette réalisation contribue à améliorer l’accès des ménages à ce service essentiel et à faciliter la vie quotidienne des habitants.</p><p class="opt" data-opt="eau"></p></div></article>
-<article class="card reveal"><div class="ph" data-alt="Système de pompage solaire de Tassakat" data-img="realisation-solaire.jpg"></div><div class="cb"><span class="badge ok" data-i18n="t49">Réalisation achevée</span><h3 data-i18n="t50"><i>02</i> Installation d’un système de pompage solaire</h3><p data-i18n="t51">Un système de pompage fonctionnant à l’énergie solaire a été installé pour assurer l’alimentation du réservoir d’eau. Cette solution contribue à l’autonomie énergétique du système de pompage et à une meilleure prise en compte des ressources énergétiques renouvelables.</p><p class="opt" data-opt="solaire"></p></div></article>
-<article class="card reveal"><div class="ph" data-alt="Moussalla en plein air de Tassakat" data-img="realisation-moussalla.jpg"></div><div class="cb"><span class="badge ok" data-i18n="t52">Réalisation achevée</span><h3 data-i18n="t53"><i>03</i> Construction d’une moussalla en plein air</h3><p data-i18n="t54">Un espace de prière en plein air a été aménagé pour répondre à un besoin collectif de la communauté. Cette réalisation met à disposition des habitants un espace commun dédié à la pratique religieuse.</p><p class="opt" data-opt="moussalla"></p></div></article>
-<article class="card reveal"><div class="ph" data-alt="Mur de protection du cimetière de Tassakat" data-img="realisation-cimetiere.jpg"></div><div class="cb"><span class="badge ok" data-i18n="t55">Réalisation achevée</span><h3 data-i18n="t56"><i>04</i> Construction d’un mur de protection autour du cimetière</h3><p data-i18n="t57">Un mur de protection a été construit autour du cimetière du douar afin de délimiter et de protéger cet espace collectif, dans le respect de son importance pour la communauté.</p><p class="opt" data-opt="cimetiere"></p></div></article>
+<article class="card reveal"><div class="ph" data-alt="Réseau d’alimentation en eau potable de Tassakat" data-img="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=1200&q=82" data-illustrative="true"></div><div class="cb"><span class="badge ok" data-i18n="t46">Réalisation achevée</span><h3 data-i18n="t47"><i>01</i> Mise en place d’un réseau d’alimentation en eau potable</h3><p data-i18n="t48">Un réseau d’alimentation en eau potable a été installé afin de desservir les foyers du douar. Cette réalisation contribue à améliorer l’accès des ménages à ce service essentiel et à faciliter la vie quotidienne des habitants.</p><p class="opt" data-opt="eau"></p></div></article>
+<article class="card reveal"><div class="ph" data-alt="Système de pompage solaire de Tassakat" data-img="https://images.unsplash.com/photo-1756913455227-fb3b85575fca?auto=format&fit=crop&w=1200&q=82" data-illustrative="true"></div><div class="cb"><span class="badge ok" data-i18n="t49">Réalisation achevée</span><h3 data-i18n="t50"><i>02</i> Installation d’un système de pompage solaire</h3><p data-i18n="t51">Un système de pompage fonctionnant à l’énergie solaire a été installé pour assurer l’alimentation du réservoir d’eau. Cette solution contribue à l’autonomie énergétique du système de pompage et à une meilleure prise en compte des ressources énergétiques renouvelables.</p><p class="opt" data-opt="solaire"></p></div></article>
+<article class="card reveal"><div class="ph" data-alt="Moussalla en plein air de Tassakat" data-img="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=1200&q=82" data-illustrative="true"></div><div class="cb"><span class="badge ok" data-i18n="t52">Réalisation achevée</span><h3 data-i18n="t53"><i>03</i> Construction d’une moussalla en plein air</h3><p data-i18n="t54">Un espace de prière en plein air a été aménagé pour répondre à un besoin collectif de la communauté. Cette réalisation met à disposition des habitants un espace commun dédié à la pratique religieuse.</p><p class="opt" data-opt="moussalla"></p></div></article>
+<article class="card reveal"><div class="ph" data-alt="Mur de protection du cimetière de Tassakat" data-img="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=82" data-illustrative="true"></div><div class="cb"><span class="badge ok" data-i18n="t55">Réalisation achevée</span><h3 data-i18n="t56"><i>04</i> Construction d’un mur de protection autour du cimetière</h3><p data-i18n="t57">Un mur de protection a été construit autour du cimetière du douar afin de délimiter et de protéger cet espace collectif, dans le respect de son importance pour la communauté.</p><p class="opt" data-opt="cimetiere"></p></div></article>
 </div>
 <div class="callout reveal"><h3 data-i18n="t58">Continuer à construire l’avenir</h3><p data-i18n="t59">Ces réalisations nous encouragent à poursuivre notre engagement et à répondre à d’autres besoins prioritaires. Aujourd’hui, nos efforts se concentrent notamment sur l’amélioration de l’accessibilité du douar et la protection durable de notre ressource en eau.</p></div>
 </div>
@@ -132,7 +514,7 @@
 <dl><dt data-i18n="t79">Localisation</dt><dd data-i18n="t80">Liaison entre Douar Tassakat et la route régionale R106</dd><dt data-i18n="t81">Revêtement prévu</dt><dd data-i18n="t82">Pierres et béton</dd><dt data-i18n="t83">Travaux envisagés</dt><dd data-i18n="t84">Préparation et compactage du terrain · fondation en pierres (hérissonnage) · surface de roulement en béton · dispositif de drainage des eaux pluviales</dd><dt data-i18n="t85">Budget prévisionnel</dt><dd class="mute" data-i18n="t86">[MONTANT À COMPLÉTER APRÈS VALIDATION DU DEVIS OU DE L’ESTIMATION TECHNIQUE]</dd></dl>
 </aside>
 </div>
-<div class="flag-gal"><div class="ph" data-alt="Piste actuelle reliant Tassakat à la R106" data-img="piste-1.jpg"></div><div class="ph" data-alt="Tracé ou plan du projet de piste" data-img="piste-trace.jpg"></div><div class="ph" data-alt="Documents techniques ou devis de la piste" data-img="piste-docs.jpg"></div></div>
+<div class="flag-gal"><div class="ph" data-alt="Piste actuelle reliant Tassakat à la R106" data-img="https://images.unsplash.com/photo-1742806417780-f55c9ae21c7d?auto=format&fit=crop&w=1200&q=82" data-illustrative="true"></div><div class="ph" data-alt="Tracé ou plan du projet de piste" data-img="https://images.pexels.com/photos/6749656/pexels-photo-6749656.jpeg?auto=compress&cs=tinysrgb&w=1200" data-illustrative="true"></div><div class="ph" data-alt="Documents techniques ou devis de la piste" data-img="https://images.unsplash.com/photo-1517226983076-bc2efa0a99b1?auto=format&fit=crop&w=1200&q=82" data-illustrative="true"></div></div>
 <div class="flag-body one">
 <h4 data-i18n="t87">Un projet qui a besoin de partenaires</h4>
 <p data-i18n="t88">La réalisation de ce projet nécessite la mobilisation de ressources financières, matérielles et, selon les besoins, d’un accompagnement technique. L’association souhaite échanger avec les entreprises, les fondations, les institutions publiques, les organismes de coopération, les membres de la diaspora et toute personne souhaitant contribuer à cette initiative.</p>
@@ -223,7 +605,6 @@
 <a class="btn primary" data-i18n="t146" data-wa="general" href="#contact">Contact général / partenariat</a>
 <a class="btn primary" data-i18n="t147" data-wa="piste" href="#contact">Projet de piste</a>
 <a class="btn primary" data-i18n="t148" data-wa="assainissement" href="#contact">Projet d’assainissement</a>
-<p class="small" data-i18n="t149">Chaque bouton ouvre WhatsApp avec un message prérempli.</p>
 </div>
 </div>
 <div class="split2 reveal">
@@ -244,16 +625,564 @@
 <div class="wrap foot">
 <div><strong data-i18n="t158">Association Tassakat pour le Développement et la Coopération</strong><p data-i18n="t159">Douar Tassakat, Commune d’Aït Abdellah<br/>Province de Taroudant, Région Souss-Massa, Maroc</p><p class="signature" data-i18n="t160">« Tassakat : une communauté engagée, des projets concrets, un avenir à construire ensemble. »</p></div>
 <nav aria-label="Pied de page"><a data-i18n="t161" href="#accueil">Accueil</a><a data-i18n="t162" href="#association">Qui sommes-nous ?</a><a data-i18n="t163" href="#realisations">Réalisations</a><a data-i18n="t164" href="#projets">Projets prioritaires</a><a data-i18n="t165" href="#engagements">Engagements</a><a data-i18n="t166" href="#contact">Contact</a></nav>
-<div aria-label="Réseaux sociaux" id="socials"></div>
+<div aria-label="Réseaux sociaux" role="group" id="socials"></div>
 </div>
 <p class="copy"><span class="t" data-i18n="t167">© </span><span id="yr"></span><span class="t" data-i18n="t168"> Association Tassakat · Les emplacements « [PHOTO À AJOUTER] » seront remplacés par des photographies authentiques.</span></p>
 </footer>
-<button aria-label="Retour en haut" class="totop" data-i18n="t169" hidden="">↑</button>
-<dialog id="lb"><button aria-label="Fermer" class="x">×</button><img alt=""/><p></p></dialog>
-<script src="lang/fr.js"></script>
-<script src="lang/en.js"></script>
-<script src="lang/ar.js"></script>
-<script src="script.js"></script>
-<script src="i18n.js"></script>
+<button type="button" aria-label="Retour en haut" class="totop" data-i18n="t169" hidden="">↑</button>
+<dialog id="lb" aria-label="Image agrandie"><button type="button" aria-label="Fermer" class="x">×</button><img alt=""/><p></p></dialog>
+<script>
+/* =====================================================================
+   CONFIGURATION – seul bloc à modifier pour les coordonnées et contenus
+   ===================================================================== */
+const CONFIG = {
+  name: "Association Tassakat pour le Développement et la Coopération",
+  preview: false,             // true (ou ?preview dans l’adresse) = affiche les emplacements « à compléter »
+  lang: "fr",                 // "fr" aujourd’hui ; "ar" (RTL) ou "en" plus tard
+  whatsapp: "212667880683",               // ex. "212600000000" (indicatif pays, sans + ni espaces). Vide = non configuré
+  email: "association.tassakat@gmail.com",                  // ex. "contact@exemple.org". Vide = non configuré
+  socials: {                  // laisser "" si non fourni (aucun lien n’est affiché)
+    facebook: "https://www.facebook.com/associationTassakat", instagram: "", youtube: "", linkedin: ""
+  },
+  imagesPath: "assets/images/",   // dossier des photos locales ; data-img accepte aussi une URL https temporaire
+  logo: "assets/logo/logo.png",   // [LOGO OFFICIEL À INTÉGRER] : déposer le fichier ici
+  stats: { habitants: "", foyers: "" },  // "" = « [XX] » affiché ; renseigner uniquement si vérifié (ex. "350")
+  // Indicateurs complémentaires par réalisation – uniquement si confirmés (sinon laisser "")
+  optional: { eau: "", solaire: "", moussalla: "", cimetiere: "" },
+  messages: {
+    general: "Bonjour, je souhaite prendre contact avec l’Association Tassakat pour obtenir des informations sur ses activités, ses réalisations et les possibilités de partenariat ou de collaboration.",
+    piste: "Bonjour, je souhaite obtenir davantage d’informations sur le projet d’aménagement de la piste rurale de Tassakat (800 mètres) et connaître les possibilités de participation à son financement.",
+    assainissement: "Bonjour, je souhaite échanger avec l’Association Tassakat sur le projet d’assainissement liquide, les études envisagées et les possibilités de partenariat financier ou technique."
+  }
+};
+
+const UI = {
+  fr: { menuOpen: "Ouvrir le menu", menuClose: "Fermer le menu", top: "Retour en haut", close: "Fermer", zoom: "Agrandir : ", nav: "Navigation principale", foot: "Pied de page", soc: "Réseaux sociaux", brand: "Association Tassakat – accueil", lb: "Image agrandie" },
+  en: { menuOpen: "Open menu", menuClose: "Close menu", top: "Back to top", close: "Close", zoom: "Enlarge: ", nav: "Main navigation", foot: "Footer", soc: "Social media", brand: "Tassakat Association – home", lb: "Enlarged image" },
+  ar: { menuOpen: "فتح القائمة", menuClose: "إغلاق القائمة", top: "العودة إلى الأعلى", close: "إغلاق", zoom: "تكبير: ", nav: "التنقل الرئيسي", foot: "تذييل الصفحة", soc: "مواقع التواصل الاجتماعي", brand: "جمعية تسكات – الرئيسية", lb: "صورة مكبّرة" }
+};
+const ui = k => (UI[document.documentElement.lang] || UI.fr)[k];
+const PREVIEW = !!CONFIG.preview || new URLSearchParams(location.search).has("preview");
+
+/* ===================================================================== */
+(() => {
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const root = document.documentElement;
+  root.classList.add("js");
+  document.body.classList.toggle("preview", PREVIEW);
+
+  // Langue / sens d’écriture (préparation arabe RTL)
+  root.lang = CONFIG.lang;
+  root.dir = CONFIG.lang === "ar" ? "rtl" : "ltr";
+
+  // WhatsApp : liens avec message prérempli
+  const wa = k => `https://wa.me/${CONFIG.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(CONFIG.messages[k])}`;
+  $$("[data-wa]").forEach(a => { if (CONFIG.whatsapp) { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener noreferrer"; } });
+  if (!CONFIG.whatsapp && !PREVIEW) { $("#waText").closest(".line").hidden = true; $(".wabtns").hidden = true; }
+  if (CONFIG.whatsapp) $("#waText").textContent = "+" + CONFIG.whatsapp.replace(/\D/g, "");
+
+  // E-mail
+  const mail = $("#mailLink");
+  if (CONFIG.email) { mail.href = "mailto:" + CONFIG.email; mail.textContent = CONFIG.email; }
+  else if (PREVIEW) { mail.classList.add("pending"); mail.removeAttribute("href"); } else mail.closest(".line").hidden = true;
+
+  // Réseaux sociaux (uniquement si fournis)
+  Object.entries(CONFIG.socials).filter(([, u]) => /^https:\/\//i.test(u)).forEach(([n, u]) => {
+    const a = document.createElement("a"); a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer"; a.textContent = n[0].toUpperCase() + n.slice(1); $("#socials").append(a);
+  });
+
+  // Indicateurs
+  let pending = 0;
+  $$("[data-stat]").forEach(el => {
+    const v = CONFIG.stats[el.dataset.stat];
+    if (v) el.textContent = v; else if (PREVIEW) { el.classList.add("pending"); pending++; } else el.parentElement.remove();
+  });
+  if (!pending) $("#statnote").remove();
+
+  // Indicateurs complémentaires des réalisations
+  if (!PREVIEW) $$("dd.mute").forEach(dd => { dd.hidden = true; dd.previousElementSibling.hidden = true; });
+  $$("[data-opt]").forEach(el => { el.textContent = CONFIG.optional[el.dataset.opt] || ""; });
+
+  // Logo
+  const li = new Image();
+  li.onload = () => { li.alt = "Logo " + CONFIG.name; $("#logo").replaceChildren(li); };
+  li.src = CONFIG.logo;
+
+  // Photos : chargement immédiat des images locales ou distantes, même en ouverture directe du fichier HTML
+  const lb = $("#lb");
+  $$(".ph[data-img]").forEach(box => {
+    const img = new Image();
+    img.alt = box.dataset.alt || "";
+    img.loading = "eager"; // chargement immédiat : fiable en ouverture locale (file://)
+    img.decoding = "async";
+    if (box.classList.contains("hero-bg")) img.fetchPriority = "high";
+    img.onload = () => {
+      box.appendChild(img); box.classList.add("loaded");
+      if (box.hasAttribute("data-nolightbox")) return;
+      box.tabIndex = 0; box.setAttribute("role", "button"); box.setAttribute("aria-label", ui("zoom") + img.alt);
+      const open = () => { $("img", lb).src = img.src; $("img", lb).alt = ""; $("p", lb).textContent = img.alt; lb.showModal(); };
+      box.addEventListener("click", open);
+      box.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
+    };
+    img.onerror = () => {   // photo absente : on masque les blocs purement décoratifs
+      if (PREVIEW || !box.matches(".split .ph, .flag-gal .ph")) return;
+      box.hidden = true; const p = box.parentElement;
+      if (p.classList.contains("split")) p.style.gridTemplateColumns = "1fr";
+      else if ([...p.children].every(c => c.hidden)) p.hidden = true;
+    };
+    const imageSource = box.dataset.img || "";
+    img.src = /^https?:\/\//i.test(imageSource) ? imageSource : CONFIG.imagesPath + imageSource;
+  });
+  lb.addEventListener("click", e => { if (e.target !== $("img", lb)) lb.close(); });
+
+  // Menu mobile
+  const burger = $(".burger"), nav = $("#nav");
+  const setMenu = o => { nav.classList.toggle("open", o); burger.setAttribute("aria-expanded", o); burger.setAttribute("aria-label", ui(o ? "menuClose" : "menuOpen")); };
+  burger.addEventListener("click", () => setMenu(!nav.classList.contains("open")));
+  nav.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && nav.classList.contains("open")) { setMenu(false); burger.focus(); } });
+  document.addEventListener("click", e => { if (nav.classList.contains("open") && !e.target.closest("#nav,.burger")) setMenu(false); });
+  matchMedia("(min-width:900px)").addEventListener("change", () => setMenu(false));
+
+  // Retour en haut
+  const up = $(".totop");
+  up.addEventListener("click", () => scrollTo({ top: 0 }));
+  addEventListener("scroll", () => { up.hidden = scrollY < 600; }, { passive: true });
+
+  // Apparition douce au défilement
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+    $$(".reveal").forEach(el => io.observe(el));
+  } else $$(".reveal").forEach(el => el.classList.add("in"));
+
+  $("#yr").textContent = new Date().getFullYear();
+})();
+
+/* ===== Finition visuelle : icônes (jeu unique, trait homogène), en-tête, section active ===== */
+(() => {
+  const P = {
+    users:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.5"/><path d="M17 14.2c2.4.3 4 2.2 4 4.8"/>',
+    search:'<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>',
+    landmark:'<path d="M3 10 12 4l9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/>',
+    clipboard:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h6"/>',
+    scale:'<path d="M12 4v16M6 20h12M5 8h14M5 8 2.5 14a2.5 2.5 0 0 0 5 0ZM19 8l-2.5 6a2.5 2.5 0 0 0 5 0Z"/>',
+    wallet:'<rect x="3" y="6" width="18" height="14" rx="2.5"/><path d="M3 10h18M16 15h2"/>',
+    filecheck:'<path d="M6 3h8l5 5v13H6zM14 3v5h5M9 14l2 2 4-4"/>',
+    eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    camera:'<path d="M4 8h3l2-3h6l2 3h3v12H4z"/><circle cx="12" cy="13.5" r="3.5"/>',
+    message:'<path d="M4 5h16v11H9l-5 4z"/>',
+    road:'<path d="M8 3 4 21M16 3l4 18M12 4v3M12 11v3M12 18v3"/>',
+    drop:'<path d="M12 3c3.5 4.5 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 2.5-6.5 6-11z"/>',
+    home:'<path d="M3 11 12 4l9 7M5 10v10h14V10M10 20v-6h4v6"/>',
+    shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',
+    leaf:'<path d="M5 19c0-9 5-14 15-14 0 10-5 15-14 15M5 19c2-4 5-7 9-9"/>',
+    heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/>',
+    link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+    sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
+    arch:'<path d="M4 21V11a8 8 0 0 1 16 0v10M2 21h20M9 21v-5a3 3 0 0 1 6 0v5"/>',
+    wall:'<path d="M3 20h18M4 20V9h16v11M4 14h16M9 9v5M15 14v6M12 14v-5"/>'
+  };
+  const svg = n => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${P[n]}</svg>`;
+  const chip = (n, cls = "") => `<span class="chip ${cls}">${svg(n)}</span>`;
+  const each = (sel, names, fn) => document.querySelectorAll(sel).forEach((el, i) => names[i] && fn(el, names[i]));
+
+  each(".prior b", ["road", "drop", "home"], (el, n) => el.innerHTML = svg(n));
+  each(".values:not(.three) div", ["heart", "users", "shield", "leaf"], (el, n) => el.insertAdjacentHTML("afterbegin", chip(n)));
+  each(".values.three div", ["users", "heart", "link"], (el, n) => el.insertAdjacentHTML("afterbegin", chip(n)));
+  each(".eng li", ["users", "search", "landmark", "clipboard", "scale", "wallet", "filecheck", "eye", "camera", "message"], (el, n) => el.insertAdjacentHTML("afterbegin", chip(n)));
+  each(".card .ph", ["drop", "sun", "arch", "wall"], (el, n) => el.insertAdjacentHTML("beforeend", chip(n, "over")));
+  document.querySelector(".flag-top")?.insertAdjacentHTML("afterbegin", chip("road"));
+  document.querySelector(".proj2")?.insertAdjacentHTML("afterbegin", chip("drop"));
+
+  // Ombre de l’en-tête au défilement
+  const top = document.querySelector(".top");
+  const onScroll = () => top.classList.toggle("scrolled", scrollY > 8);
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  // Section active dans le menu
+  const links = [...document.querySelectorAll("#nav a")];
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) links.forEach(a => { const on = a.getAttribute("href") === "#" + e.target.id; a.classList.toggle("act", on); on ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"); });
+    }), { rootMargin: "-45% 0px -50% 0px" });
+    links.forEach(a => { const s = document.querySelector(a.getAttribute("href")); s && io.observe(s); });
+  }
+})();
+
+/* Moteur de langue : FR (source) / EN / AR (RTL). Texte = lang/<code>.js ; clé absente => français. */
+const initI18n = () => {
+  const D = window.I18N, root = document.documentElement;
+  D.fr = { "meta.title": document.title, "meta.desc": document.querySelector("meta[name=description]").content };
+  document.querySelectorAll("[data-i18n]").forEach(el => { D.fr[el.dataset.i18n] ??= el.innerHTML; });
+  const ALIAS = {t161:"t4",t162:"t5",t163:"t6",t164:"t7",t165:"t8",t166:"t9",t49:"t46",t52:"t46",t55:"t46"};
+  const LANGS = ["fr", "en", "ar"];
+  const tr = (l, k) => (D[l] && (D[l][k] ?? D[l][ALIAS[k]])) ?? D.fr[k];
+  const setMeta = (sel, attr, v) => { const m = document.querySelector(sel); if (m && v) m.setAttribute(attr, v); };
+  function setLang(l) {
+    if (!LANGS.includes(l)) l = "fr";
+    root.lang = l; root.dir = l === "ar" ? "rtl" : "ltr";
+    document.querySelectorAll("[data-i18n]").forEach(el => { el.innerHTML = tr(l, el.dataset.i18n) ?? ""; });
+    document.title = tr(l, "meta.title");
+    setMeta('meta[name=description]', "content", tr(l, "meta.desc"));
+    setMeta('meta[property="og:title"]', "content", tr(l, "meta.title"));
+    setMeta('meta[property="og:description"]', "content", tr(l, "meta.desc"));
+    setMeta('meta[property="og:locale"]', "content", { fr: "fr_FR", en: "en_GB", ar: "ar_MA" }[l]);
+    [["#nav", "nav"], ["footer nav", "foot"], ["#socials", "soc"], [".totop", "top"], ["#lb .x", "close"], ["#lb", "lb"], [".brand", "brand"]]
+      .forEach(([q, k]) => { const e = document.querySelector(q); e && e.setAttribute("aria-label", ui(k)); });
+    const bg = document.querySelector(".burger"); bg.setAttribute("aria-label", ui(bg.getAttribute("aria-expanded") === "true" ? "menuClose" : "menuOpen"));
+    if (!PREVIEW) { const c = document.querySelector("[data-i18n=t168]"); c.textContent = c.textContent.split(" · ")[0]; }
+    document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === l));
+    document.querySelectorAll("[data-wa]").forEach(a => {   // messages WhatsApp dans la langue choisie
+      const k = a.dataset.wa, msg = (l !== "fr" && D[l] && D[l]["msg." + k]) || CONFIG.messages[k];
+      if (CONFIG.whatsapp) a.href = `https://wa.me/${CONFIG.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(msg)}`;
+    });
+    try { localStorage.setItem("tassakat-lang", l); } catch (e) {}
+  }
+  document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+  let start = new URLSearchParams(location.search).get("lang");
+  try { start = start || localStorage.getItem("tassakat-lang"); } catch (e) {}
+  setLang(start || CONFIG.lang);
+};
+
+/* English – content taken from the English editorial document (Tassakat___Complete_Website_Editorial_Content.docx). Missing key = French text. */
+window.I18N=window.I18N||{};
+I18N.en={
+ "meta.title": "Tassakat Association for Development and Cooperation – Aït Abdellah, Taroudant, Morocco",
+ "meta.desc": "Community association of Douar Tassakat (Aït Abdellah, Taroudant province, Souss-Massa, Morocco): achievements, priority projects, transparency and partnerships for local development.",
+ "msg.general": "Hello, I would like to contact the Association Tassakat to find out more about its activities, achievements and opportunities for partnership or collaboration.",
+ "msg.piste": "Hello, I would like to receive more information about the Tassakat rural track improvement project (800 metres) and learn how I could contribute to its funding.",
+ "msg.assainissement": "Hello, I would like to discuss the wastewater management project with the Association Tassakat, including the proposed studies and opportunities for financial or technical partnership.",
+ "t1": "Skip to content",
+ "t3": "Association for Development and Cooperation",
+ "t4": "Home",
+ "t5": "About us",
+ "t6": "Achievements",
+ "t7": "Priority projects",
+ "t8": "Commitments",
+ "t9": "Contact",
+ "t10": "Douar Tassakat · Aït Abdellah · Taroudant · Morocco",
+ "t12": "Together, let’s build a better future for our village.",
+ "t13": "Tassakat is a community moving forward through solidarity, the commitment of its residents and a shared determination to build lasting solutions. Through its achievements and new projects, our Association works to improve living conditions, strengthen essential infrastructure and prepare a better future for generations to come. We believe that sustainable local development is built together with residents and with partners who share this ambition.",
+ "t14": "Explore our projects",
+ "t15": "Get to know our Association",
+ "t16": "Our priorities",
+ "t17": "Improve access to the village.",
+ "t18": "Protect our water resources for the long term.",
+ "t19": "Improve living conditions across the community.",
+ "t20": "residents",
+ "t21": "households",
+ "t22": "major achievements",
+ "t23": "[INDICATOR TO BE CONFIRMED] — “[XX]” indicators will only be shown once verified.",
+ "t24": "Our commitment starts with the needs of our community",
+ "t25": "We identify the village’s priorities, bring residents together and seek the resources needed to develop projects that benefit everyone. By working with institutions and partners, we aim to turn local needs into concrete and lasting achievements.",
+ "t26": "01 — About us",
+ "t27": "An association serving our community",
+ "t43": "02 — Our achievements",
+ "t44": "Concrete actions for the benefit of all.",
+ "t46": "Completed achievement",
+ "t60": "03 — Our priority projects",
+ "t61": "Building today the solutions of tomorrow.",
+ "t64": "Ready for implementation – Funding sought",
+ "t65": "Priority project 1 – Upgrading the track connecting Tassakat to the R106",
+ "t66": "Improving access to Tassakat and making residents’ journeys easier",
+ "t76": "length",
+ "t78": "width",
+ "t90": "Help improve access to Tassakat.",
+ "t91": "Concept and study stage – Partners sought",
+ "t92": "Priority project 2 – Preparing a wastewater management project",
+ "t93": "Protecting our water resource, safeguarding our future",
+ "t95": "At this stage, no contamination of the aquifer has been confirmed and no technical solution has yet been selected. A study process is needed to better understand local conditions and identify a solution suited to the area’s needs and constraints.",
+ "t86": "[AMOUNT TO BE ADDED AFTER THE QUOTATION OR TECHNICAL ESTIMATE HAS BEEN APPROVED]",
+ "t103": "Help protect our water resource.",
+ "t106": "04 — Transparency, governance and commitment",
+ "t107": "Our commitments: acting responsibly and transparently",
+ "t131": "These commitments are operating principles of the association.",
+ "t132": "05 — Contact, partnership and participation",
+ "t133": "Together, let’s move Tassakat’s projects forward",
+ "t136": "Three ways to get involved",
+ "t140": "Let’s talk about your project or proposal",
+ "t142": "WhatsApp:",
+ "t143": "Email address:",
+ "t144": "Address:",
+ "t145": "Douar Tassakat, Commune of Aït Abdellah, Taroudant Province, Souss-Massa Region, Morocco",
+ "t146": "General contact / partnership",
+ "t147": "Track project",
+ "t148": "Wastewater management project",
+ "t149": "Each button opens WhatsApp with a pre-filled message.",
+ "t153": "Even far from Tassakat, you can help shape its future",
+ "t155": "Tassakat: our community, our future.",
+ "t157": "Together, let’s build a better future for our village.",
+ "t158": "Tassakat Association for Development and Cooperation",
+ "t159": "Douar Tassakat, Commune of Aït Abdellah<br>Taroudant Province, Souss-Massa Region, Morocco",
+ "t160": "“Tassakat: a committed community, practical projects and a future to build together.”",
+ "t168": "Tassakat Association · “[PHOTO TO ADD]” placeholders will be replaced by authentic photographs.",
+ "t28": "The Association Tassakat for Development and Cooperation is a community-based association located in Douar Tassakat, in Aït Abdellah Commune, Taroudant Province, Souss-Massa Region, Morocco. It builds on solidarity, residents’ participation and collective commitment to help improve living conditions in the village.",
+ "t29": "We believe that local development starts with a good understanding of the area’s needs, the involvement of its residents and the delivery of projects suited to local realities. Our ambition is to gradually strengthen the Association’s ability to design, lead and monitor initiatives in partnership with public, private and civil society actors.",
+ "t30": "A commitment deeply rooted in our area",
+ "t31": "Our knowledge of the village and its surroundings allows us to be attentive to residents’ concerns and to the community’s priorities. This local grounding is a starting point for identifying needs, encouraging dialogue and proposing suitable projects. We also wish to strengthen the ties between residents, families living elsewhere and members of the diaspora.",
+ "t32": "Our vision",
+ "t33": "A rural community where everyone can live in better conditions, in a village that is better equipped, more accessible and more resilient, where essential infrastructure and natural resources receive greater attention.",
+ "t34": "Our mission",
+ "t35": "To turn local needs into concrete and lasting projects. To do so, we seek to identify the community’s priorities, mobilise available resources and skills, prepare and support useful initiatives, develop partnerships and monitor achievements.",
+ "t36": "Our values",
+ "t37": "<b>Solidarity</b>Making mutual support and collective commitment drivers of local development.",
+ "t38": "<b>Participation</b>Giving residents a voice in identifying needs and thinking through priorities.",
+ "t39": "<b>Responsibility and transparency</b>Acting with care in preparing projects and using resources.",
+ "t40": "<b>Sustainability</b>Favouring solutions that are suited to the area’s needs and useful over time.",
+ "t41": "Building partnerships to achieve more",
+ "t42": "Tassakat’s development requires the cooperation of several stakeholders. The Association wishes to expand its exchanges with Aït Abdellah Commune, public institutions, businesses, foundations, NGOs and cooperation bodies. Our role is to link the community’s needs with partners who can contribute to useful projects, by promoting clear preparation, coordination and follow-up.",
+ "t45": "Tassakat’s development is taking shape step by step, through the community’s commitment and initiatives that respond to essential needs. The achievements presented here reflect our determination to take concrete action to improve life in the village.",
+ "t47": "<i>01</i> Installation of a drinking water supply network",
+ "t48": "A drinking water supply network has been installed to serve households in the village. This achievement helps improve households’ access to an essential service and makes residents’ daily lives easier.",
+ "t50": "<i>02</i> Installation of a solar-powered pumping system",
+ "t51": "A solar-powered pumping system has been installed to supply the water storage tank. This solution contributes to the pumping system’s energy self-sufficiency and to greater use of renewable energy resources.",
+ "t53": "<i>03</i> Construction of an open-air prayer area (moussalla)",
+ "t54": "An open-air prayer area has been created in response to a shared need of the community. It provides residents with a common space dedicated to religious practice.",
+ "t56": "<i>04</i> Construction of a protective wall around the cemetery",
+ "t57": "A protective wall has been built around the village cemetery to mark the boundaries of, and protect, this shared space, in recognition of its importance to the community.",
+ "t58": "Continuing to build for the future",
+ "t59": "These achievements encourage us to continue our work and to address other priority needs. Today, our efforts are focused in particular on improving access to the village and on the long-term protection of our water resource.",
+ "t62": "Building on what has already been achieved, the Association wishes to continue its work through projects that address important community needs. Two priorities have now been identified: improving access to the village by upgrading the track connecting Tassakat to the R106 road, and preparing a wastewater management initiative to help protect the water resource.",
+ "t63": "The two projects are at different stages of maturity. The track project is ready to be presented to partners in the search for funding. The wastewater management project is still at the concept and study stage.",
+ "t67": "The track connecting Douar Tassakat to the R106 regional road plays an important role in residents’ daily journeys. Its condition and the difficulties of travelling along it, particularly during the rainy season, can make it harder to reach the village and to travel to essential services.",
+ "t68": "These difficulties affect in particular journeys for healthcare and emergencies, children’s trips to school, residents’ transport and access to everyday services and activities. Improving this link is therefore a priority for strengthening accessibility and the safety of travel.",
+ "t69": "Expected benefits",
+ "t70": "Improve the village’s connection to the R106 road.",
+ "t71": "Make travel easier for residents, particularly during the rainy season.",
+ "t72": "Improve access to healthcare and emergency services.",
+ "t73": "Make school journeys and everyday travel easier.",
+ "t74": "Reduce access difficulties and the risk of isolation during rainy periods.",
+ "t80": "Link between Douar Tassakat and the R106 regional road",
+ "t82": "Stone and concrete",
+ "t84": "Ground preparation and compaction; construction of a stone foundation layer (hand-packed stone sub-base); installation of a concrete running surface; and provision of a stormwater drainage system",
+ "t87": "A project that needs partners",
+ "t88": "Delivering this project requires financial and material resources and, where needed, technical support. The Association wishes to talk with businesses, foundations, public institutions, cooperation bodies, members of the diaspora and anyone who would like to contribute to this initiative.",
+ "t89": "Support can take different forms: contributing to all or part of the funding, providing materials, offering technical assistance or connecting the Association with partners. The project budget will be shared once the financial elements of the project have been confirmed.",
+ "t94": "The underground aquifer is the village’s only source of drinking water. In this context, the absence of a collective wastewater management system is a potential risk to the quality of the water resource and to the health of the population.",
+ "t96": "An approach still to be built",
+ "t97": "The Association wishes to mobilise partners to support the first stages of reflection and study. Financial support is being sought to move this preparatory work forward. Technical expertise and institutional support will also be important in identifying the options that could be considered.",
+ "t98": "Intended benefits",
+ "t99": "Help protect the groundwater resource used for drinking water.",
+ "t100": "Prevent potential environmental and health risks.",
+ "t101": "Prepare a lasting response to the village’s wastewater management needs.",
+ "t102": "Preserve natural resources for future generations.",
+ "t104": "Different ways to contribute",
+ "t105": "Partners can contribute through financial support, technical assistance, institutional cooperation, the provision of materials or skills, or by connecting the Association with organisations that may be able to support the projects.",
+ "t108": "The success of a development project depends on more than the financial resources mobilised. It also rests on the quality of its preparation, the coordination of stakeholders, the monitoring of achievements and trust between partners.",
+ "t109": "At the Association Tassakat for Development and Cooperation, we regard transparency, accountability and community participation as essential principles of our commitment. We want to build a relationship of trust with residents, institutions, businesses and the organisations that support us.",
+ "t110": "<b>Community participation</b>Listen to residents and encourage members to take part in discussions and decisions.",
+ "t113": "<b>Planning expenditure</b>Where possible, obtain several quotations so that there are points of comparison before an offer is chosen.",
+ "t115": "<b>Responsible use of resources</b>Ensure that the resources mobilised are used in line with the objectives defined for each project and in the community’s interest.",
+ "t116": "<b>Documentation and transparency</b>Make the available financial information and supporting documents accessible to the partners concerned, depending on the nature of the project and the existing documents.",
+ "t118": "<b>Photo documentation</b>Document the different stages with photographs, where possible.",
+ "t119": "<b>Communication with partners</b>Keep partners informed of the progress of the initiatives they support.",
+ "t120": "Governance built on community participation",
+ "t121": "The Association draws its legitimacy from its local roots and its commitment to the people of Tassakat. We attach particular importance to members’ participation and to taking account of the needs expressed by the community.",
+ "t122": "Building lasting collaborations",
+ "t124": "Trust is built through transparency",
+ "t125": "We believe that every financial or material contribution carries a responsibility towards the people and organisations that place their trust in us. That is why we pay particular attention to planning expenditure, comparing the available offers and using the resources mobilised. We also wish to maintain clear communication with our partners and to enable them to access, depending on the documents available, information on how their contributions have been used.",
+ "t126": "Monitoring achievements and ensuring compliance",
+ "t127": "Mobilising resources is only one stage in a project’s success. It is also essential to monitor progress and to ensure that what is delivered matches the objectives set.",
+ "t128": "A partnership based on trust and shared objectives",
+ "t134": "The development of our village is a shared responsibility. It is built through residents’ commitment, the solidarity of families and the diaspora, and the mobilisation of partners who wish to contribute to the development of rural areas.",
+ "t135": "Whether you would like to support a project, propose a collaboration, share your expertise or simply find out more about our Association, we would be happy to hear from you. Every contribution, every skill and every partnership can help bring about useful and lasting initiatives for our community.",
+ "t137": "<b>Take part in the Association’s activities</b>Are you a resident of Tassakat, a member of the diaspora or someone attached to our village? Your participation and your ideas can help move the community’s initiatives forward.",
+ "t138": "<b>Support a project</b>Would you like to help improve access to the village or protect its water resources? We can present the priority projects to you, together with the possibilities for financial, material or technical support.",
+ "t139": "<b>Become a partner</b>Do you represent a business, a foundation, a public institution, an NGO or a cooperation organisation? We are open to financial, technical and institutional partnerships.",
+ "t141": "For any information request, partnership proposal or wish to take part, you can contact the Association Tassakat directly. We will be happy to talk with you about the Association’s activities, achievements and priority projects.",
+ "t150": "Do you represent an institution, business or organisation?",
+ "t151": "The Association Tassakat wishes to develop collaborations with stakeholders who share its interest in rural development and in improving communities’ living conditions. We are available to present our projects, discuss the needs identified and explore the possibilities for cooperation.",
+ "t152": "Depending on the nature of your approach, we can discuss the detailed presentation of the priority projects, financial and material needs, possibilities for technical or institutional partnership, the documents available for studying the projects, and the monitoring of supported initiatives.",
+ "t154": "The residents of our village, families living elsewhere and everyone attached to Tassakat are part of this collective effort. You can take part by sharing the projects, putting the Association in touch with partners, contributing your experience or supporting an initiative that matters to you. Distance should not be an obstacle to solidarity.",
+ "t156": "Development is built step by step. Our achievements show what solidarity can accomplish. Our projects express our determination to go further. With residents’ commitment and the support of responsible partners, we can continue building a village that is better equipped, more accessible and more sustainable.",
+ "t162": "About us",
+ "t79": "Location",
+ "t81": "Planned surfacing",
+ "t83": "Planned works",
+ "t85": "Estimated budget",
+ "t111": "<b>Identifying local needs</b>Identify the village’s real needs and set priorities by favouring initiatives that serve the collective interest.",
+ "t112": "<b>Institutional coordination</b>Develop cooperation with the Commune of Aït Abdellah and the actors involved in rural development.",
+ "t114": "<b>Comparing offers</b>Review the available proposals, taking account of costs, the characteristics of the services offered and how well they fit the project’s needs.",
+ "t117": "<b>Monitoring progress</b>Monitor the progress of the work. Coordinate communication with the companies and other stakeholders involved. Pay attention to the quality of the work and its conformity with the project objectives.",
+ "t123": "Developing an area requires cooperation between local associations, local authorities, public institutions and private partners. The Association Tassakat wishes to develop and strengthen its cooperation with Aït Abdellah Commune and the various stakeholders involved in rural development. We are open to dialogue and collaboration with public institutions, businesses, foundations, NGOs and cooperation bodies. Our aim is to build partnerships based on shared objectives, transparent communication and a common commitment to serving the population.",
+ "t129": "We regard our partners as essential contributors to the success of Tassakat’s development projects. By working together, we want to build collaborations in which each party brings its skills, resources and commitment. We favour a clear presentation of needs and objectives, transparent exchanges on the projects supported, responsible use of the resources mobilised, careful monitoring of achievements and communication with partners on the progress of initiatives.",
+ "t130": "<b>Would you like to support Tassakat’s projects?</b> Whether you are a business, a foundation, a public institution, a cooperation organisation or a member of the diaspora, we would be happy to discuss opportunities for collaboration. Our Association remains available to present its achievements, share information on its projects and discuss the different forms of support that could be considered. Together, let’s build useful, responsible and lasting projects for Tassakat."
+};
+
+/* العربية – المحتوى مأخوذ من الوثيقة التحريرية العربية (Contenu_editorial_global_Association_Tassakat_AR.docx). المفتاح الناقص = النص الفرنسي. */
+window.I18N=window.I18N||{};
+I18N.ar={
+ "meta.title": "جمعية تسكات للتنمية والتعاون – آيت عبد الله، تارودانت، المغرب",
+ "meta.desc": "جمعية مجتمعية بدوار تسكات (جماعة آيت عبد الله، إقليم تارودانت، جهة سوس ماسة، المغرب): إنجازات ومشاريع ذات أولوية وشفافية وشراكات من أجل التنمية المحلية.",
+ "msg.general": "مرحباً، أرغب في التواصل مع جمعية تسكات للحصول على معلومات حول أنشطتها وإنجازاتها وإمكانيات الشراكة أو التعاون.",
+ "msg.piste": "مرحباً، أرغب في الحصول على مزيد من المعلومات حول مشروع تهيئة المسلك القروي بتسكات (800 متر)، والتعرف على إمكانيات المساهمة في تمويله.",
+ "msg.assainissement": "مرحباً، أرغب في التواصل مع جمعية تسكات بشأن مشروع التطهير السائل، والدراسات المرتقبة، وإمكانيات الشراكة المالية أو التقنية.",
+ "t1": "انتقل إلى المحتوى",
+ "t3": "جمعية للتنمية والتعاون",
+ "t4": "الرئيسية",
+ "t5": "من نحن؟",
+ "t6": "إنجازاتنا",
+ "t7": "مشاريعنا ذات الأولوية",
+ "t8": "التزاماتنا",
+ "t9": "اتصل بنا",
+ "t10": "دوار تسكات · آيت عبد الله · تارودانت · المغرب",
+ "t12": "معاً، نبني مستقبلاً أفضل لدوارنا.",
+ "t13": "تسكات مجتمع يتقدم بفضل التضامن وانخراط سكانه والإرادة الجماعية لبناء حلول مستدامة. ومن خلال إنجازاته ومشاريعه الجديدة، تعمل جمعيتنا على تحسين ظروف العيش وتعزيز البنيات التحتية الأساسية والإعداد لمستقبل أفضل للأجيال القادمة. ونؤمن بأن التنمية المحلية المستدامة تُبنى بتعاون السكان وشركاء يتقاسمون معنا هذه الطموحات.",
+ "t14": "اكتشفوا مشاريعنا",
+ "t15": "تعرّفوا على جمعيتنا",
+ "t16": "أولوياتنا",
+ "t17": "تحسين الولوج إلى الدوار.",
+ "t18": "الحفاظ على مواردنا المائية بشكل مستدام.",
+ "t19": "تعزيز ظروف عيش أفراد المجتمع المحلي.",
+ "t20": "نسمة",
+ "t21": "أسرة",
+ "t22": "إنجازات كبرى",
+ "t23": "[مؤشر يجب تأكيده] — لن تُعرض المؤشرات «[XX]» إلا بعد التحقق منها.",
+ "t24": "ينطلق التزامنا من احتياجات مجتمعنا",
+ "t25": "نعمل على تحديد أولويات دوارنا، وتعبئة السكان، والبحث عن الوسائل اللازمة لإنجاز مشاريع تعود بالنفع على الجميع. ومن خلال التعاون مع المؤسسات والشركاء، نطمح إلى تحويل الاحتياجات المحلية إلى منجزات ملموسة ومستدامة.",
+ "t26": "01 — من نحن؟",
+ "t27": "جمعية في خدمة مجتمعنا",
+ "t43": "02 — إنجازاتنا",
+ "t44": "مبادرات ملموسة في خدمة الجميع.",
+ "t46": "إنجاز مكتمل",
+ "t60": "03 — مشاريعنا ذات الأولوية",
+ "t61": "نبني اليوم حلول الغد.",
+ "t64": "مشروع جاهز للتنفيذ – البحث عن التمويل",
+ "t65": "المشروع ذو الأولوية 1 – تهيئة المسلك الرابط بين تسكات والطريق R106",
+ "t66": "فك العزلة عن تسكات وتيسير تنقل سكانها",
+ "t75": "800 م",
+ "t76": "الطول",
+ "t77": "3 م",
+ "t78": "العرض",
+ "t86": "[يُضاف المبلغ بعد المصادقة على عرض الأسعار أو التقدير التقني]",
+ "t90": "ساهموا في فك العزلة عن تسكات.",
+ "t91": "مشروع في مرحلة التفكير والدراسة – البحث عن شركاء",
+ "t92": "المشروع ذو الأولوية 2 – الإعداد لمشروع التطهير السائل",
+ "t93": "حماية مواردنا المائية حفاظاً على مستقبلنا",
+ "t95": "في هذه المرحلة، لم يتم تأكيد وجود أي تلوث في الفرش المائي، كما لم يتم اعتماد أي حل تقني بعد. ومن الضروري إنجاز دراسة لفهم الخصائص المحلية بشكل أفضل وتحديد حل ملائم لاحتياجات المجال الترابي وإكراهاته.",
+ "t103": "ساهموا في حماية مواردنا المائية.",
+ "t106": "04 — الشفافية والحكامة والالتزام",
+ "t107": "التزاماتنا: العمل بمسؤولية وشفافية",
+ "t131": "هذه الالتزامات مبادئ لعمل الجمعية.",
+ "t132": "05 — الاتصال والشراكة والمشاركة",
+ "t133": "معاً، لنعمل على إنجاز مشاريع تسكات",
+ "t136": "ثلاث طرق للمساهمة",
+ "t140": "لنتحدث عن مشروعكم أو مقترحكم",
+ "t142": "واتساب:",
+ "t143": "البريد الإلكتروني:",
+ "t144": "العنوان:",
+ "t145": "دوار تسكات – جماعة آيت عبد الله إقليم تارودانت – جهة سوس ماسة – المغرب",
+ "t146": "تواصل عام / شراكة",
+ "t147": "مشروع المسلك",
+ "t148": "مشروع التطهير السائل",
+ "t149": "يفتح كل زر واتساب برسالة جاهزة.",
+ "t153": "حتى من بعيد، يمكنكم المساهمة في مستقبل تسكات",
+ "t155": "تسكات، مجتمعنا، مستقبلنا.",
+ "t157": "معاً، نبني مستقبلاً أفضل لدوارنا.",
+ "t158": "جمعية للتنمية والتعاون",
+ "t159": "دوار تسكات، جماعة آيت عبد الله<br>إقليم تارودانت، جهة سوس ماسة، المغرب",
+ "t160": "«تسكات: مجتمع ملتزم، ومشاريع ملموسة، ومستقبل نبنيه معًا.»",
+ "t168": "جمعية تسكات · ستُستبدل خانات «[أضف صورة]» بصور حقيقية.",
+ "t2": "تسكات",
+ "t11": "تسكات",
+ "t28": "جمعية تسكات للتنمية والتعاون جمعية مجتمعية مقرها بدوار تسكات، التابع لجماعة آيت عبد الله بإقليم تارودانت، جهة سوس ماسة، بالمغرب. وترتكز على التضامن ومشاركة السكان والانخراط الجماعي للمساهمة في تحسين ظروف العيش بالدوار.",
+ "t29": "نحن مقتنعون بأن التنمية المحلية تبدأ بمعرفة جيدة باحتياجات المجال الترابي، وإشراك سكانه، وتنفيذ مشاريع تستجيب للواقع المحلي. ونطمح إلى تعزيز قدرة الجمعية تدريجياً على بلورة المبادرات وحملها وتتبعها، بشراكة مع الفاعلين العموميين والخواص والجمعويين.",
+ "t30": "ارتباط راسخ بمجالنا الترابي",
+ "t31": "تتيح لنا معرفتنا بالدوار ومحيطه الإنصات إلى انشغالات السكان وأولويات المجتمع المحلي. ويشكل هذا الارتباط المحلي منطلقاً لتحديد الاحتياجات وتعزيز الحوار واقتراح مشاريع ملائمة. كما نرغب في توطيد الروابط بين السكان والأسر المقيمة خارج الدوار وأفراد الجالية.",
+ "t32": "رؤيتنا",
+ "t33": "مجال قروي يتمكن فيه الجميع من العيش في ظروف أفضل، داخل قرية تتوفر على تجهيزات أحسن، ويسهل الولوج إليها، وتتمتع بقدرة أكبر على الصمود، مع إيلاء عناية أكبر للبنيات التحتية الأساسية والموارد الطبيعية.",
+ "t34": "مهمتنا",
+ "t35": "تحويل الاحتياجات المحلية إلى مشاريع ملموسة ومستدامة. ولهذا نسعى إلى تحديد أولويات المجتمع المحلي، وتعبئة الموارد والكفاءات المتاحة، وإعداد المبادرات المفيدة ومواكبتها، وتطوير الشراكات وتتبع الإنجازات.",
+ "t36": "قيمنا",
+ "t37": "<b>التضامن</b>جعل التعاون والتآزر والانخراط الجماعي محركات للتنمية المحلية.",
+ "t38": "<b>المشاركة</b>إتاحة المجال للسكان للمساهمة في تحديد الاحتياجات والتفكير في الأولويات.",
+ "t39": "<b>المسؤولية والشفافية</b>التحلي بالجدية في إعداد المشاريع واستخدام الموارد.",
+ "t40": "<b>الاستدامة</b>إعطاء الأولوية للحلول الملائمة لاحتياجات المجال الترابي والمفيدة على المدى الطويل.",
+ "t41": "بناء شراكات للمضي قدماً",
+ "t42": "تتطلب تنمية تسكات تعاون عدد من الفاعلين. وتسعى الجمعية إلى تطوير علاقاتها مع جماعة آيت عبد الله والمؤسسات العمومية والشركات والمؤسسات المانحة والمنظمات غير الحكومية وهيئات التعاون. ويتمثل دورنا في الربط بين احتياجات المجتمع المحلي والشركاء القادرين على المساهمة في مشاريع مفيدة، مع الحرص على وضوح الإعداد والتنسيق والتتبع.",
+ "t45": "تتحقق تنمية تسكات بشكل تدريجي، بفضل انخراط المجتمع المحلي والمبادرات التي يتم تنفيذها للاستجابة للاحتياجات الأساسية. وتعكس الإنجازات المعروضة هنا إرادة العمل الملموس من أجل تحسين إطار العيش بالدوار.",
+ "t47": "<i>01</i> إنجاز شبكة للتزويد بالماء الصالح للشرب",
+ "t48": "تم إنجاز شبكة للتزويد بالماء الصالح للشرب لفائدة أسر الدوار. ويساهم هذا الإنجاز في تحسين ولوج الأسر إلى هذه الخدمة الأساسية وتيسير الحياة اليومية للسكان.",
+ "t50": "<i>02</i> تركيب نظام للضخ بالطاقة الشمسية",
+ "t51": "تم تركيب نظام للضخ يعمل بالطاقة الشمسية لضمان تزويد خزان الماء. ويساهم هذا الحل في تعزيز الاستقلال الطاقي لنظام الضخ وتحسين الاستفادة من مصادر الطاقة المتجددة.",
+ "t53": "<i>03</i> بناء مُصلّى في الهواء الطلق",
+ "t54": "تم تهيئة فضاء للصلاة في الهواء الطلق استجابة لحاجة جماعية للمجتمع المحلي. ويوفر هذا الإنجاز للسكان فضاءً مشتركاً مخصصاً لممارسة الشعائر الدينية.",
+ "t56": "<i>04</i> بناء سور وقائي حول المقبرة",
+ "t57": "تم بناء سور وقائي حول مقبرة الدوار من أجل تحديد هذا الفضاء الجماعي وحمايته، مع مراعاة مكانته وأهميته لدى المجتمع المحلي.",
+ "t58": "مواصلة بناء المستقبل",
+ "t59": "تشجعنا هذه الإنجازات على مواصلة التزامنا والاستجابة لاحتياجات ذات أولوية أخرى. وتنصب جهودنا اليوم، على وجه الخصوص، على تحسين الولوج إلى الدوار والحفاظ على مواردنا المائية بشكل مستدام.",
+ "t62": "بعد الإنجازات التي تحققت، ترغب الجمعية في مواصلة عملها من خلال مشاريع تستجيب لاحتياجات مهمة للمجتمع المحلي. وقد تم تحديد أولويتين في الوقت الراهن: تحسين الولوج إلى الدوار عبر تهيئة المسلك الرابط بين تسكات والطريق الجهوية R106، والإعداد لمشروع للتطهير السائل للمساهمة في حماية الموارد المائية.",
+ "t63": "لا يوجد المشروعان في المرحلة نفسها من النضج. فمشروع المسلك جاهز لتقديمه إلى الشركاء من أجل البحث عن التمويل، في حين لا يزال مشروع التطهير في مرحلة التفكير والدراسة.",
+ "t67": "يضطلع المسلك الرابط بين دوار تسكات والطريق الجهوية R106 بدور مهم في تنقلات السكان اليومية. وقد تؤدي حالته وصعوبات المرور، خصوصاً خلال موسم الأمطار، إلى تعقيد الولوج إلى الدوار والتنقل نحو الخدمات الأساسية.",
+ "t68": "وتشمل هذه الصعوبات، على وجه الخصوص، التنقل المرتبط بالعلاج والحالات الاستعجالية، وتنقلات التلاميذ، ونقل السكان، فضلاً عن الولوج إلى الخدمات وممارسة الأنشطة اليومية. لذلك، يشكل تحسين هذا المسلك أولوية لتعزيز سهولة الولوج وسلامة التنقل.",
+ "t69": "الفوائد المنتظرة",
+ "t70": "تحسين ربط الدوار بالطريق R106.",
+ "t71": "تيسير تنقل السكان، خاصة خلال موسم الأمطار.",
+ "t72": "تحسين ظروف الولوج إلى العلاج وخدمات الطوارئ.",
+ "t73": "تيسير تنقلات التلاميذ والتنقلات اليومية.",
+ "t74": "الحد من صعوبات الولوج ومخاطر العزلة خلال فترات التساقطات المطرية.",
+ "t80": "المسلك الرابط بين دوار تسكات والطريق الجهوية R106.",
+ "t82": "الحجارة والخرسانة.",
+ "t84": "تهيئة الأرضية ودكّها، وإنجاز أساس من الحجارة (التبليط الحجري)، ووضع طبقة للسير من الخرسانة، وتهيئة نظام لتصريف مياه الأمطار.",
+ "t87": "مشروع يحتاج إلى شركاء",
+ "t88": "يتطلب إنجاز هذا المشروع تعبئة موارد مالية ومادية، ومواكبة تقنية حسب الحاجة. وترغب الجمعية في التواصل مع الشركات والمؤسسات المانحة والمؤسسات العمومية وهيئات التعاون وأفراد الجالية وكل شخص يرغب في المساهمة في هذه المبادرة.",
+ "t89": "يمكن أن يتخذ الدعم أشكالاً مختلفة، منها المساهمة في التمويل الكلي أو الجزئي، أو توفير مواد البناء، أو المواكبة التقنية، أو ربط الجمعية بشركاء محتملين. وسيتم الإعلان عن الميزانية بعد التأكد من المعطيات المالية للمشروع.",
+ "t94": "يشكل الفرش المائي الجوفي المصدر الوحيد للماء الصالح للشرب بالدوار. وفي هذا السياق، فإن غياب نظام جماعي للتطهير السائل يمثل خطراً محتملاً على جودة الموارد المائية وصحة السكان.",
+ "t96": "مسار ينبغي بناؤه",
+ "t97": "ترغب الجمعية في تعبئة شركاء لمواكبة المراحل الأولى من التفكير والدراسة. ويتم البحث عن دعم مالي للمضي قدماً في هذه المرحلة التحضيرية. كما ستكون الكفاءات التقنية والمواكبة المؤسساتية مهمة لتحديد الخيارات الممكنة.",
+ "t98": "الفوائد المنشودة",
+ "t99": "المساهمة في حماية المورد الجوفي المستعمل للتزود بالماء الصالح للشرب.",
+ "t100": "الوقاية من المخاطر البيئية والصحية المحتملة.",
+ "t101": "الإعداد لحل مستدام يستجيب لاحتياجات الدوار في مجال التطهير.",
+ "t102": "الحفاظ على الموارد الطبيعية لفائدة الأجيال القادمة.",
+ "t104": "أشكال مختلفة للمساهمة",
+ "t105": "يمكن للشركاء المساهمة من خلال الدعم المالي، أو المواكبة التقنية، أو التعاون المؤسساتي، أو توفير المواد والكفاءات، أو ربط الجمعية بهيئات يمكنها مواكبة المشاريع.",
+ "t108": "لا يتوقف نجاح مشروع تنموي على الموارد المالية التي تمت تعبئتها فقط، بل يرتكز أيضاً على جودة إعداده، وتنسيق جهود المتدخلين، وتتبع الإنجازات، والثقة بين مختلف الشركاء.",
+ "t109": "نعتبر في جمعية تسكات للتنمية والتعاون أن الشفافية والمسؤولية ومشاركة المجتمع المحلي مبادئ أساسية لعملنا. ونسعى إلى بناء علاقة ثقة مع السكان والمؤسسات والشركات والهيئات التي تواكبنا.",
+ "t110": "<b>المشاركة المجتمعية</b>الإنصات إلى السكان وتشجيع انخراط الأعضاء في النقاشات والقرارات.",
+ "t113": "<b>إعداد النفقات</b>البحث، كلما أمكن ذلك، عن عدة عروض أسعار لتوفير عناصر المقارنة قبل اختيار العرض المناسب.",
+ "t115": "<b>الاستخدام المسؤول للموارد</b>الحرص على استخدام الموارد المعبأة وفق الأهداف المحددة لكل مشروع وبما يخدم مصلحة المجتمع المحلي.",
+ "t116": "<b>التبرير والشفافية</b>إتاحة المعلومات المالية والوثائق الإثباتية المتوفرة للشركاء المعنيين، بحسب طبيعة المشروع والوثائق الموجودة.",
+ "t118": "<b>التوثيق بالصور</b>توثيق مختلف المراحل بالصور، كلما أمكن ذلك.",
+ "t119": "<b>التواصل مع الشركاء</b>إخبار الشركاء بتطور المبادرات التي يدعمونها.",
+ "t120": "حكامة قائمة على مشاركة المجتمع المحلي",
+ "t121": "تستمد الجمعية مشروعيتها من ارتباطها المحلي وانخراطها إلى جانب سكان تسكات. ونولي أهمية خاصة لمشاركة الأعضاء وأخذ الاحتياجات التي يعبر عنها المجتمع المحلي بعين الاعتبار.",
+ "t122": "بناء تعاون مستدام",
+ "t124": "الثقة تُبنى بالشفافية",
+ "t125": "نعتبر أن كل مساهمة مالية أو مادية ترتب مسؤولية تجاه الأشخاص والمنظمات التي وضعت ثقتها فينا. ولهذا نولي عناية خاصة لإعداد النفقات ومقارنة العروض المتاحة واستخدام الموارد المعبأة. كما نسعى إلى الحفاظ على تواصل واضح مع شركائنا وتمكينهم، وفق الوثائق المتاحة، من الاطلاع على المعلومات المتعلقة باستخدام مساهماتهم.",
+ "t126": "تتبع الإنجازات والحرص على مطابقتها",
+ "t127": "لا تشكل تعبئة الموارد سوى مرحلة من مراحل نجاح المشروع. فمن الضروري أيضاً تتبع تقدمه والحرص على أن تتوافق الإنجازات مع الأهداف المحددة.",
+ "t128": "شراكة قائمة على الثقة والأهداف المشتركة",
+ "t134": "إن تنمية دوارنا مسؤولية جماعية. وهي تتحقق بفضل انخراط السكان وتضامن الأسر وأفراد الجالية، وكذلك تعبئة الشركاء الراغبين في المساهمة في تنمية المجالات القروية.",
+ "t135": "سواء كنتم ترغبون في دعم مشروع، أو اقتراح تعاون، أو تقديم خبرة، أو مجرد الحصول على مزيد من المعلومات حول جمعيتنا، فسيسعدنا التواصل معكم. فكل مساهمة وكل كفاءة وكل شراكة يمكن أن تسهم في إنجاز مبادرات مفيدة ومستدامة لمجتمعنا.",
+ "t137": "<b>المشاركة في أنشطة الجمعية</b>هل أنتم من سكان تسكات، أو من أفراد الجالية، أو من الأشخاص المرتبطين بدوارنا؟ يمكن لمشاركتكم وأفكاركم أن تسهم في دفع مبادرات المجتمع المحلي إلى الأمام.",
+ "t138": "<b>دعم مشروع</b>هل ترغبون في المساهمة في فك العزلة عن الدوار أو حماية موارده المائية؟ يمكننا تقديم المشاريع ذات الأولوية لكم وشرح إمكانيات الدعم المالي أو المادي أو التقني.",
+ "t139": "<b>أن تصبحوا شركاء</b>هل تمثلون شركة أو مؤسسة مانحة أو مؤسسة عمومية أو منظمة غير حكومية أو هيئة للتعاون؟ نحن منفتحون على الشراكات المالية والتقنية والمؤسساتية.",
+ "t141": "لأي طلب معلومات أو اقتراح شراكة أو رغبة في المشاركة، يمكنكم التواصل مباشرة مع جمعية تسكات. ويمكننا تبادل الحديث حول أنشطة الجمعية وإنجازاتها ومشاريعها ذات الأولوية.",
+ "t150": "هل تمثلون مؤسسة أو شركة أو منظمة؟",
+ "t151": "تسعى جمعية تسكات إلى تطوير علاقات التعاون مع الفاعلين الذين يتقاسمون معها الاهتمام بالتنمية القروية وتحسين ظروف عيش المجتمعات. ونحن على استعداد لتقديم مشاريعنا، والتواصل بشأن الاحتياجات المحددة، ودراسة إمكانيات التعاون.",
+ "t152": "بحسب طبيعة مبادرتكم، يمكننا تبادل المعلومات حول العروض التفصيلية للمشاريع ذات الأولوية، والاحتياجات المالية والمادية، وإمكانيات الشراكة التقنية أو المؤسساتية، والوثائق المتاحة لدراسة المشاريع وتتبع المبادرات المدعومة.",
+ "t154": "يشكل سكان دوارنا والأسر المقيمة في أماكن أخرى وكل الأشخاص المرتبطين بتسكات جزءاً من هذه الدينامية الجماعية. ويمكنكم المساهمة من خلال تقاسم المشاريع، أو ربط الجمعية بشركاء محتملين، أو تقديم خبرتكم، أو دعم مبادرة تهمكم. فالمسافة لا ينبغي أن تكون عائقاً أمام التضامن.",
+ "t156": "تُبنى مسيرة التنمية خطوة بعد خطوة. وتشهد إنجازاتنا على ما يمكن للتضامن تحقيقه، فيما تعبر مشاريعنا عن إرادتنا في المضي قدماً. وبانخراط السكان ودعم الشركاء المسؤولين، يمكننا مواصلة العمل من أجل دوار أفضل تجهيزاً، وأسهل ولوجاً، وأكثر استدامة.",
+ "t161": "الرئيسية",
+ "t162": "من نحن؟",
+ "t163": "إنجازاتنا",
+ "t164": "مشاريعنا ذات الأولوية",
+ "t79": "الموقع",
+ "t81": "نوع التكسية المرتقبة",
+ "t83": "الأشغال المرتقبة",
+ "t85": "الميزانية التقديرية",
+ "t111": "<b>تحديد الاحتياجات المحلية</b>تحديد الاحتياجات الحقيقية للدوار وإعطاء الأفضلية للمبادرات التي تخدم المصلحة الجماعية.",
+ "t112": "<b>التنسيق المؤسساتي</b>تطوير علاقات التعاون مع جماعة آيت عبد الله ومختلف الفاعلين المعنيين بالتنمية القروية.",
+ "t114": "<b>مقارنة العروض</b>دراسة المقترحات المتاحة مع مراعاة التكاليف وخصائص الخدمات ومدى ملاءمتها لاحتياجات المشروع.",
+ "t117": "<b>تتبع التقدم</b>تتبع الأشغال وتنسيق التواصل مع المتدخلين والاهتمام بجودة الإنجازات ومدى مطابقتها لأهداف المشروع.",
+ "t123": "تتطلب تنمية المجال الترابي تعاوناً بين الجمعيات المحلية والجماعات الترابية والمؤسسات العمومية والشركاء الخواص. وتسعى جمعية تسكات إلى تطوير وتعزيز علاقات التعاون مع جماعة آيت عبد الله ومختلف الفاعلين المعنيين بالتنمية القروية. نحن منفتحون على التواصل والتعاون مع المؤسسات العمومية والشركات والمؤسسات المانحة والمنظمات غير الحكومية وهيئات التعاون. ونطمح إلى بناء شراكات تقوم على أهداف مشتركة وتواصل شفاف والتزام جماعي في خدمة السكان.",
+ "t129": "نعتبر شركاءنا فاعلين أساسيين في نجاح مشاريع التنمية بتسكات. ومن خلال العمل المشترك، نطمح إلى بناء علاقات تعاون يساهم فيها كل طرف بكفاءاته وموارده والتزامه. نحرص على تقديم واضح للاحتياجات والأهداف، والتواصل بشفافية بشأن المشاريع المدعومة، والاستخدام المسؤول للموارد المعبأة، والتتبع الدقيق للإنجازات، وإطلاع الشركاء على تقدم المبادرات.",
+ "t130": "<b>هل ترغبون في مواكبة مشاريع تسكات؟</b> سواء كنتم شركة أو مؤسسة مانحة أو مؤسسة عمومية أو منظمة للتعاون أو فرداً من أفراد الجالية، فسيسعدنا التواصل معكم لبحث إمكانيات التعاون. تظل جمعيتنا رهن إشارتكم لتقديم إنجازاتها وتقاسم المعلومات المتعلقة بمشاريعها ومناقشة مختلف أشكال الدعم الممكنة. معاً، نبني مشاريع مفيدة ومسؤولة ومستدامة لفائدة تسكات."
+};
+
+initI18n();
+</script>
 </body>
 </html>
